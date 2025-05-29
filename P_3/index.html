@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>못난이 농산물 - 심사 결과</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barrio&family=Kirang+Haerang&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Wanted Sans', 'Kirang Haerang', sans-serif;
+            background: url('bg_2.jpg') center/cover no-repeat;
+            min-height: 100vh;
+        }
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 0;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .title-box {
+            background: #fff;
+            border-radius: 8px;
+            margin-top: 60px;
+            padding: 32px 48px 24px 48px;
+            text-align: center;
+            font-family: 'Wanted Sans', 'Kirang Haerang', sans-serif;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            display: inline-block;
+        }
+        .title-box .red {
+            color: #FF2424;
+        }
+        .main-content {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 40px;
+        }
+        .tomato-list-box {
+            background: #222;
+            border-radius: 12px;
+            padding: 24px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        }
+        .tomato-list-box img {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            margin-bottom: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            transition: border 0.2s;
+        }
+        .tomato-list-box img.selected {
+            border: 2px solid #FF2424;
+        }
+        .big-tomato-box {
+            background: #222;
+            border-radius: 12px;
+            padding: 32px 36px 24px 36px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 320px;
+            min-height: 320px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        }
+        .big-tomato-box img {
+            width: 220px;
+            height: 220px;
+            object-fit: contain;
+        }
+        .big-tomato-box .label {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-top: 12px;
+            letter-spacing: 1px;
+        }
+        .result-box {
+            background: #222;
+            color: #fff;
+            border-radius: 8px;
+            padding: 28px 40px;
+            font-size: 1.2rem;
+            font-family: 'Wanted Sans', sans-serif;
+            margin-top: 60px;
+            text-align: center;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+        }
+        .result-box .point {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .next-btn {
+            position: fixed;
+            right: 80px;
+            bottom: 60px;
+            background: #FF2424;
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            padding: 18px 48px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            transition: background 0.2s;
+            z-index: 10;
+        }
+        .next-btn:hover {
+            background: #d13e0a;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="title-box">
+            우리도 드디어!<br>
+            세상에 나가 <span class="red">멋진 토마토</span>가 될 준비가 된건가요?
+        </div>
+        <div class="main-content">
+            <div class="tomato-list-box">
+                <img src="tomato1.png" alt="토마토1" class="selected" data-type="1">
+                <img src="tomato2.png" alt="토마토2" data-type="2">
+                <img src="tomato3.png" alt="토마토3" data-type="3">
+            </div>
+            <div class="big-tomato-box">
+                <div class="label" id="tomato-label">&lt;무농약 토마토&gt;</div>
+                <img src="tomato1.png" alt="무농약 토마토" id="big-tomato">
+            </div>
+        </div>
+        <div class="result-box" id="result-box">
+            <span class="point">중결점 : 형성장애</span><br>
+            농산물 표준 규격에 맞지 않는 모양으로, 판매가 불가능합니다.
+        </div>
+        <a href="index3.html">
+            <button class="next-btn">다음 →</button>
+        </a>
+    </div>
+    <script>
+        // 토마토별 정보
+        const tomatoInfo = {
+            1: {
+                img: 'tomato1.png',
+                label: '<무농약 토마토>',
+                result: '<span class="point">중결점 : 형성장애</span><br>농산물 표준 규격에 맞지 않는 모양으로, 판매가 불가능합니다.'
+            },
+            2: {
+                img: 'tomato2.png',
+                label: '<유기농 토마토>',
+                result: '<span class="point">경미한 결점 : 색상 불균일</span><br>외관상 색이 고르지 않으나, 섭취에는 문제가 없습니다.'
+            },
+            3: {
+                img: 'tomato3.png',
+                label: '<4계절 토마토>',
+                result: '<span class="point">정상</span><br>판매가 가능합니다!'
+            }
+        };
+        const tomatoImgs = document.querySelectorAll('.tomato-list-box img');
+        const bigTomato = document.getElementById('big-tomato');
+        const tomatoLabel = document.getElementById('tomato-label');
+        const resultBox = document.getElementById('result-box');
+
+        tomatoImgs.forEach(img => {
+            img.addEventListener('click', function() {
+                // 선택 표시
+                tomatoImgs.forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+                // 큰 토마토, 라벨, 결과 변경
+                const type = this.getAttribute('data-type');
+                bigTomato.src = tomatoInfo[type].img;
+                tomatoLabel.innerHTML = tomatoInfo[type].label;
+                resultBox.innerHTML = tomatoInfo[type].result;
+            });
+        });
+    </script>
+</body>
+</html> 
